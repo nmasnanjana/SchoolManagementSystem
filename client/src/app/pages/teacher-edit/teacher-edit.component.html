@@ -1,0 +1,91 @@
+<!-- TITLE -->
+<div class="mb-40 mt-40">
+    <h1>Teacher Edit</h1>
+</div>
+<div class="card mb-40">
+    <div class="card-header">
+        <i class="fa fa-edit"></i> Edit
+    </div>
+    <div class="card-body">
+        <form #editForm="ngForm" [ngClass]="{'was-validated': formValid!=null}">
+            <div class="row justify-content-md-center">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="DateofBirth">DateofBirth *</label>
+                        <input type="date" class="form-control" id="DateofBirth" [(ngModel)]="item.DateofBirth" name="DateofBirth" #DateofBirth="ngModel" required>
+                        <div class="invalid-feedback">Value is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="EnterDate">EnterDate *</label>
+                        <input type="date" class="form-control" id="EnterDate" [(ngModel)]="item.EnterDate" name="EnterDate" #EnterDate="ngModel" required>
+                        <div class="invalid-feedback">Value is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="FirstName">FirstName *</label>
+                        <input type="text" class="form-control" id="FirstName" [(ngModel)]="item.FirstName" name="FirstName" #FirstName="ngModel" required>
+                        <div class="invalid-feedback">Value is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="LastName">LastName *</label>
+                        <input type="text" class="form-control" id="LastName" [(ngModel)]="item.LastName" name="LastName" #LastName="ngModel" required>
+                        <div class="invalid-feedback">Value is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="LastWorkPlace">LastWorkPlace</label>
+                        <input type="text" class="form-control" id="LastWorkPlace" [(ngModel)]="item.LastWorkPlace" name="LastWorkPlace" #LastWorkPlace="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="ServiceTime">ServiceTime *</label>
+                        <input type="number" class="form-control" id="ServiceTime" [(ngModel)]="item.ServiceTime" name="ServiceTime" #ServiceTime="ngModel" required>
+                        <div class="invalid-feedback">Value is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Subject">Subject *</label>
+                        <input type="text" class="form-control" id="Subject" [(ngModel)]="item.Subject" name="Subject" #Subject="ngModel" required>
+                        <div class="invalid-feedback">Value is required</div>
+                    </div>
+                    <!-- RELATIONS -->
+                    <h2 class="mb-20">Relations</h2>
+
+                    <div class="pb-30">
+                        <div class="mb-20">
+                            <label>_Subjects</label>
+
+                            <span class="dropdown ml-20">
+                                <button class="btn btn-dropdown dropdown-toggle" type="button" id="dropdownMenuButton_Subjects" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Add
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_Subjects">
+                                    <button class="dropdown-item" *ngFor="let item of list_Subjects" [class.disabled]="containSubjects(item._id)" (click)="$event.preventDefault(); containSubjects(item._id) || addSubjects(item._id)">{{item._id}}
+                                    </button>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="mb-40">
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngIf="!item._subjects || item._subjects.length == 0">No item found</li>
+                                <li class="list-group-item" *ngFor="let obj of item._subjects; let i = index">
+                                    {{obj}}
+
+                                    <button class="btn btn-danger pull-right" type="button" (click)="removeSubjects(i)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    
+        
+
+                    <!-- BUTTON BAR -->
+                    <div class="mt-40">
+                        <button class="btn btn-primary pull-right" (click)="save(editForm.valid, item)">Save</button>
+                        <button class="btn btn-secondary pull-right mr-2" (click)="goBack()">Back To List</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
